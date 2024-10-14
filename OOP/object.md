@@ -186,12 +186,20 @@ public:
     // copy constructor
     DynamicArray(DynamicArray& d)
     {
+        delete[] this->data;
+
         this->data = new int[d.size];
         this->size = d.size;
         for (int i = 0; i < d.size; i++)
         {
             this->data[i] = d.data[i];
         }
+    }
+
+    // overloaded destructor
+    ~DynamicArray()
+    {
+        delete[] this->data;
     }
 
     // print method
@@ -281,6 +289,11 @@ int main()
 ```
 - The assignment operator can also act on multiple objects simultaneously.
 - It is executed from <strong>right-to-left</strong>.
+<br>
+
+<h4>Assignment Operator v/s Copy Constructor</h4>
+
+- Although they are functionally similar, the <strong>assignment operator</strong> is used to copy data from one object to another, and the <strong>copy constructor</strong> is used to create a new object (allocating memory for it) from an existing object.
 ---
 <h3>General Operator Overloading</h3>
 
