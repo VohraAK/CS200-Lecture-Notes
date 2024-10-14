@@ -246,3 +246,57 @@ int main()
 - Here, the object to be copied <strong>must always</strong> be passed by reference, as copying by value will result in an "infinite loop".
 
 ![alt text](image-1.png)
+
+
+---
+<h3>Assignment Operator (=)</h3>
+
+- The assignment operator is called when an object is assigned to another object.
+- It can be overloaded by the user if the default assignment operator is not sufficient (e.g. it only shallow copies data).
+
+```C++
+class Dummy
+{
+...
+    // overloading assignment operator
+    void operator=(const Dummy &other)
+    {
+        delete[] array;
+        
+        for (int i = 0; i < ARRAY_SIZE; i++)
+            array[i] = other.array[i];
+    }
+
+};
+
+int main()
+{
+    Dummy d1;
+    Dummy d2;
+
+    d2 = d1;
+
+    return 0;
+}
+```
+- The assignment operator can also act on multiple objects simultaneously.
+- It is executed from <strong>right-to-left</strong>.
+---
+<h3>General Operator Overloading</h3>
+
+- A lot of operators can be overloaded to suit user needs.
+- For example, we can overload the <strong>+</strong> operator to add two objects of the same class, or just mutauting properties of objects.
+
+```C++
+... 
+Dummy operator+(const Dummy &d2)
+{
+    Dummy temp;
+
+    temp.a = this->a + d2.a;
+    temp.f = this->f + d2.f;
+
+    return temp;
+}
+```
+
