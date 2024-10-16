@@ -253,7 +253,7 @@ int main()
 - If the object itself is passed as argument, a copy of the object is created in a seperate memory block, and is passed to the function.
 - Here, the object to be copied <strong>must always</strong> be passed by reference, as copying by value will result in an "infinite loop".
 
-![alt text](image-1.png)
+![Copy constructor calling cases](image-1.png)
 
 
 ---
@@ -312,4 +312,83 @@ Dummy operator+(const Dummy &d2)
     return temp;
 }
 ```
+<br>
 
+<h4>Overloading relational operators:</h4>
+
+- Relational operators are used to compare two objects of the same class.
+- Examples: <, >, ==, !=, <=, >=, etc.
+
+<br>
+
+<h5> Example ">" overloading (class activity)</h5>
+
+```C++
+...
+// Dummy:-> int feet; int inches;
+bool operator>(const Dummy &d2)
+{
+    return ((this->feet > d2.feet) || (this->feet == d2.feet && this->inches > d2.inches)) ? 1 : 0;
+}
+```
+
+<h5>Example "==" overloading (class activity)</h5>
+
+```C++
+...
+bool operator==(const Dummy &d2)
+{
+    return ((this->feet == d2.feet) && (this->inches == d2.inches)) ? 1 : 0;
+}
+```
+<h5>Example "!=" overloading (class activity)</h5>
+
+```C++
+...
+bool operator!=(const Dummy &d2)
+{
+    return (*this == d2) ? 0 : 1;
+}
+```
+
+<br>
+<h4>Overloading incremental operators</h4>
+
+- Incremental operators are used to increment or decrement the properties of an object.
+- Examples: ++, --, +=, -=, etc.
+
+<br>
+<h5>Example pre-increment "++" overloading (class activity)</h5>
+
+```C++
+...
+// Dummy:-> int feet; int inches;
+
+// pre-increment overload
+Dummy operator++()
+{
+    this->inches++;
+
+    // adjust feet and inches accordingly
+    simplify();
+
+    return *this;
+}
+```
+
+<h5>Example post-increment "++" overloading (class activity)</h5>
+
+```C++
+...
+// post-increment overload
+Dummy operator++(int)
+{
+    Dummy temp = *this;
+
+    this->inches++;
+    simplify();
+
+    // return unincremented object
+    return temp;
+}
+```
