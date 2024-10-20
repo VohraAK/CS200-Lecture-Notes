@@ -245,7 +245,7 @@ int main()
 <br>
 <h5>Output:</h5>
 
-![Output](image.png)
+![Output](assets/image.png)
 
 <br>
 <h4>Aside: Call by Value v/s Call by Reference and Copy Constructor</h4>
@@ -253,7 +253,7 @@ int main()
 - If the object itself is passed as argument, a copy of the object is created in a seperate memory block, and is passed to the function.
 - Here, the object to be copied <strong>must always</strong> be passed by reference, as copying by value will result in an "infinite loop".
 
-![Copy constructor calling cases](image-1.png)
+![Copy constructor calling cases](assets/image-1.png)
 
 
 ---
