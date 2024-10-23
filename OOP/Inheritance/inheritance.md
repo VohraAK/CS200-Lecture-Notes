@@ -220,3 +220,41 @@ class Derived : private Base {
 | Public            | Public             | Protected             | Private            |
 | Protected         | Protected          | Protected             | Private            |
 | Private           | Private            | Private                | Private            |
+
+---
+<h3>Constructors and Destructors in Inheritance</h3>
+
+- The constructors and destructors are not inherited by the derived class, but we can call the constructor of the base class in derived class.
+
+- The constructors will be called by the complier in the order in which they are inherited. It means that base class constructors will be called first, then derived class constructors will be called.
+- The destructors will be called in reverse order in which the compiler is declared.
+- We can also call the constructors and destructors manually in the derived class.
+
+
+```C++
+class Parent {
+public:
+    // base class constructor
+    Parent() { cout << "Inside base class" << endl; }
+};
+
+// sub class
+class Child : public Parent {
+public:
+    // sub class constructor
+    Child() { cout << "Inside sub class" << endl; }
+};
+
+// main function
+int main()
+{
+
+    // creating object of sub class
+    Child obj;
+
+    return 0;
+}
+```
+<h5> Output:</h5>
+
+![alt text](assets/image.png)
