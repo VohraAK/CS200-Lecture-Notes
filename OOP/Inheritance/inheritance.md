@@ -217,9 +217,9 @@ class Derived : private Base {
 
 | Base Class Member | Public Inheritance | Protected Inheritance | Private Inheritance |
 | ----------------- | ------------------ | --------------------- | ------------------- |
-| Public            | Public             | Protected             | Private            |
-| Protected         | Protected          | Protected             | Private            |
-| Private           | Private            | Private                | Private            |
+| Public            | Public             | Protected             | Private             |
+| Protected         | Protected          | Protected             | Private             |
+| Private           | Inaccessible       | Inaccessible          | Inaccessible        |
 
 ---
 
