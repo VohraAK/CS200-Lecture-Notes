@@ -222,39 +222,201 @@ class Derived : private Base {
 | Private           | Private            | Private                | Private            |
 
 ---
-<h3>Constructors and Destructors in Inheritance</h3>
+
+<h4>List of methods not inherited by the derived class:</h4>
+
+- Default constructor
+- Copy constructor
+- Copy assignment operator
+- Move assignment operator (=)
+- Destructor
+
+
+<h3 style="text-align: center;">Constructors and Destructors in Inheritance</h3>
 
 - The constructors and destructors are not inherited by the derived class, but we can call the constructor of the base class in derived class.
 
-- The constructors will be called by the complier in the order in which they are inherited. It means that base class constructors will be called first, then derived class constructors will be called.
-- The destructors will be called in reverse order in which the compiler is declared.
-- We can also call the constructors and destructors manually in the derived class.
-
-
 ```C++
-class Parent {
+#include <iostream>
+
+class Base {
 public:
-    // base class constructor
-    Parent() { cout << "Inside base class" << endl; }
+    int pub;     // Accessible publicly
+protected:
+    int prot;    // Accessible within Base and Derived
+private:
+    int priv;    // Only accessible within Base
+
+public:
+    Base()
+    {
+        std::cout << "Base Default Constructor" << std::endl;
+    }
+
+    Base(int pub, int prot, int priv)
+    {
+        std::cout << "Base Param Constructor" << std::endl;
+        this->pub = pub;
+        this->prot = prot;
+        this->priv = priv;
+    }
 };
 
-// sub class
-class Child : public Parent {
+// calling base constructor in derived class
+class Derived : public Base {
+private:
+    int a;
 public:
-    // sub class constructor
-    Child() { cout << "Inside sub class" << endl; }
+    
+    Derived()
+    {
+        // base default constructor is called without using constructor initializer list
+        std::cout << "Derived Default Constructor" << std::endl;
+    }
+    Derived(int pub, int prot, int priv, int a) : Base(pub, prot, priv)
+    {
+        // base param constructor must be called using the above constructor initializer list
+        // otherwise only the base default constructor will be called
+        std::cout << "Derived Param Constructor" << std::endl;
+        this->a = a;
+    }
 };
+
 
 // main function
 int main()
 {
-
-    // creating object of sub class
-    Child obj;
+    // creating object of derived class
+    std::cout << std::endl << "Creating Object 1:" << std::endl;
+    Derived obj1;
+    std::cout << std::endl <<"Creating Object 2:" << std::endl;
+    Derived obj2(1, 2, 3, 10);
 
     return 0;
 }
 ```
-<h5> Output:</h5>
+
+<h5>Output</h5>
 
 ![alt text](assets/image.png)
+
+- The constructors will be called by the complier in the order in which they are inherited, i.e. base class constructors will be called first, then the derived class constructors.
+- The destructors will be called in reverse order in which the compiler is declared.
+
+---
+<h3 style="text-align: center;">Friend Functions</h3>
+
+- Friend functions are given special access to the private and protected members of the base class.
+- Useful in certain circumstances.
+
+<br>
+
+<h5>Case 1: Using friend paradigm:</h5>
+
+```C++
+#include <iostream>
+using namespace std;
+
+class Box {
+private:
+    double width;
+public:
+    int amount;
+
+public:
+    Box(double w) : width(w) {}
+
+    // Friend function declaration
+    friend ostream& operator<<(ostream& out, const Box& box);
+};
+
+// Friend function definition
+ostream& operator<<(ostream& out, const Box& box) {
+    out << "Box width: " << box.width;
+    return out;
+}
+
+int main() {
+    Box box(10.5);
+    cout << box << endl; // Calls the overloaded << operator
+    return 0;
+}
+```
+- All of the members of the base class are accessible to the friend function.
+
+<br>
+
+<h5>Case 2: Without using friend paradigm:</h5>
+
+```C++
+#include <iostream>
+using namespace std;
+
+class Box {
+private:
+    double width;
+
+public:
+    int amount;
+
+public:
+    Box(double w, int a) : width(w), amount(a) {}
+
+    // Member function to print Box data
+    void print(ostream& out) const {
+        out << "Box width: " << width << std::endl;
+    }
+};
+
+// Non-member function that calls the member function
+ostream& operator<<(ostream& out, const Box& box) {
+    box.print(out); // Calls the print member function to access private data
+    out << "Number of boxes: " << box.amount;
+    return out;
+}
+
+int main() {
+    Box box(10.5, 5);
+    cout << box << endl; // Calls the overloaded << operator
+    return 0;
+}
+```
+- Only `amount` is accessible to the friend function, not `private`.
+
+<br>
+
+<h5>Output for both cases:</h5>
+
+![alt text](assets/image-1.png)
+
+<br>
+
+<h3 style="text-align: center;">Upcasting And Slicing</h3>
+
+- Upcasting is the process of converting a derived class object to a base class object.
+- This is done by "casting" a pointer or reference to a derived class to a pointer or reference to its base class.
+
+```C++
+...
+int main()
+{
+    Derived d;
+    Base* b = &d;
+
+    return 0;
+}
+```
+<br>
+
+- Slicing is the opposite of upcasting, where a base class object is converted to a derived class object (downcasted).
+
+```C++
+...
+int main()
+{
+    Base b;
+    Derived* d = &b;
+
+    return 0;
+}
+```
