@@ -219,7 +219,7 @@ class Derived : private Base {
 | ----------------- | ------------------ | --------------------- | ------------------- |
 | Public            | Public             | Protected             | Private             |
 | Protected         | Protected          | Protected             | Private             |
-| Private           | Inaccessible       | Inaccessible          | Inaccessible        |
+| Private           | Private       | Inaccessible          | Inaccessible        |
 
 ---
 
@@ -289,7 +289,7 @@ int main()
     // creating object of derived class
     std::cout << std::endl << "Creating Object 1:" << std::endl;
     Derived obj1;
-    std::cout << std::endl <<"Creating Object 2:" << std::endl;
+    std::cout << std::endl << "Creating Object 2:" << std::endl;
     Derived obj2(1, 2, 3, 10);
 
     return 0;
@@ -389,7 +389,9 @@ int main() {
 
 ![alt text](assets/image-1.png)
 
-<br>
+
+
+---
 
 <h3 style="text-align: center;">Upcasting And Slicing</h3>
 
@@ -408,7 +410,7 @@ int main()
 ```
 <br>
 
-- Slicing is the opposite of upcasting, where a base class object is converted to a derived class object (downcasted).
+- A base class object (not a pointer / reference) is <strong>sliced</strong> when it is converted to a derived class object
 
 ```C++
 ...
@@ -420,3 +422,4 @@ int main()
     return 0;
 }
 ```
+- This may lead to loss of data / functionality and is generally less safer than upcasting.

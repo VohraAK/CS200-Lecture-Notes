@@ -8,7 +8,12 @@
 - Runtime polymorphism
 
 ---
+<h3 style="text-align: center;">Compile-time Polymorphism</h3>
 
+- Compile-time polymorphism is resilved at compile-time typically through function overloading and operator overloading.
+
+- The compiler decides which function / operator to call based on the context in which it is used.
+---
 <h3 style="text-align:center;">Run-time Polymorphism</h3>
 
 - Run-time polymorphism is the ability of an object to exhibit different characteristics based on the context in which it is used.
@@ -95,6 +100,7 @@ class Base {
 public:
     virtual void print() = 0;
 };
+
 
 class Derived : public Base {
 public:
