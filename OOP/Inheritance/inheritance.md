@@ -306,7 +306,7 @@ int main()
 ---
 <h3 style="text-align: center;">Friend Functions</h3>
 
-- Friend functions are given special access to the private and protected members of the base class.
+- `friend` functions are given special access to the private and protected members of the base class.
 - Useful in certain circumstances.
 
 <br>
@@ -343,6 +343,8 @@ int main() {
 }
 ```
 - All of the members of the base class are accessible to the friend function.
+
+- Similary, `friend` classes can also be defined to access private members of the base class.
 
 <br>
 
