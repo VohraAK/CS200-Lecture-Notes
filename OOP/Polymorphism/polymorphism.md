@@ -123,3 +123,60 @@ int main() {
 <h5>Output</h5>
 
 ![alt text](assets/image.png)
+
+---
+<h3>Virtual Destructors</h3>
+
+- When an object is deleted through its base class pointer, the destructor being called will depend on whether the base class destructor is virtual or not.
+
+- If the base class destructor is virtual, the derived destructor will be called with the base class destructor, otherwise, <strong>only</strong> the base class destructor will be called.
+
+<h5>Example 1: Without Virtual Destructor</h5>
+
+```C++
+class Base 
+{
+public:
+    ~Base() { std::cout << "Base destructor\n"; }
+};
+
+class Derived : public Base 
+{
+public:
+    ~Derived() { std::cout << "Derived destructor\n"; }
+};
+
+int main() 
+{
+    Base* ptr = new Derived();
+    delete ptr;  // Undefined behavior! Only Base destructor is called
+}
+
+```
+
+![alt text](assets/image-2.png)
+
+<br>
+
+<h5>Example 2: With Virtual Destructor</h5>
+
+```C++
+class Base 
+{
+public:
+    virtual ~Base() { std::cout << "Base destructor\n"; }
+};
+
+class Derived : public Base 
+{
+public:
+    ~Derived() { std::cout << "Derived destructor\n"; }
+};
+
+int main() 
+{
+    Base* ptr = new Derived();
+    delete ptr;  // Derived destructor is called
+}
+```
+![alt text](assets/image-3.png)

@@ -28,7 +28,7 @@
 // private:
 //     int a;
 // public:
-    
+
 //     Derived()
 //     {
 //         // base default constructor is called without using constructor initializer list
@@ -43,7 +43,6 @@
 //     }
 // };
 
-
 // // main function
 // int main()
 // {
@@ -55,8 +54,6 @@
 
 //     return 0;
 // }
-
-
 
 // #include <iostream>
 // using namespace std;
@@ -89,3 +86,32 @@
 //     cout << box << endl; // Calls the overloaded << operator
 //     return 0;
 // }
+
+#include <iostream>
+
+class Person
+{
+public:
+    void show()
+    {
+        std::cout << "Person" << std::endl;
+    }
+};
+
+class Student : virtual public Person
+{
+};
+
+class Employee : virtual public Person
+{
+};
+
+class TA : public Student, public Employee
+{
+};
+
+int main()
+{
+    TA ta;
+    ta.show();
+}

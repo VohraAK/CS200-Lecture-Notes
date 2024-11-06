@@ -1,23 +1,20 @@
 #include <iostream>
 
-class Base {
+class Base 
+{
 public:
-    virtual void print() = 0;
+    virtual ~Base() { std::cout << "Base destructor\n"; }
 };
 
-class Derived : public Base {
+class Derived : public Base 
+{
 public:
-    void print() override {
-        std::cout << "Derived class" << std::endl;
-    }
+    ~Derived() { std::cout << "Derived destructor\n"; }
 };
 
-int main() {
-
-    Base *b = new Derived();
-    
-    std::cout << "Calling print()..." << std::endl;
-    b->print();
-
-    return 0;
+int main() 
+{
+    Base* ptr = new Derived();
+    delete ptr;  // Derived destructor is called
 }
+

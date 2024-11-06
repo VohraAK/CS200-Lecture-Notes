@@ -425,3 +425,81 @@ int main()
 }
 ```
 - This may lead to loss of data / functionality and is generally less safer than upcasting.
+
+---
+<h4>Aside: Multiple Inheritance and The Diamond Problem</h4>
+
+- In multiple inheritance, a class can inherit from more than one base class.
+- The diamond problem can arise when using multiple inheritance with classes that share a common base class.
+
+<h5>Example:</h5>
+
+```C++
+class Person
+{
+    void show()
+    {
+        cout << "Person" << endl;
+    }
+};
+
+class Student : public Person
+{
+    ...
+};
+
+class Employee : public Person
+{
+    ...
+};
+
+class TA : public Student, public Employee
+{
+    ...
+}
+
+int main() {
+    TA ta;
+    ta.show();
+
+    // Error: Ambiguity, as both Student and Employee have their own copies of Person
+}
+```
+<br>
+
+- <strong>Virtual Inheritance</strong> is a solution to this problem; an instance of `TA` will only have one instance of `Person`, rather than multiple.
+
+```C++
+class Person
+{
+public:
+    void show()
+    {
+        cout << "Person" << endl;
+    }
+};
+
+class Student : virtual public Person
+{
+    ...
+};
+
+class Employee : virtual public Person
+{
+    ...
+};
+
+class TA : public Student, public Employee
+{
+    ...
+}
+
+int main() 
+{
+    TA ta;
+    ta.show();
+
+    // no ambiguity now
+}
+
+```

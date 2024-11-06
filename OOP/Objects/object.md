@@ -392,3 +392,82 @@ Dummy operator++(int)
     return temp;
 }
 ```
+---
+<h2 text-align="center;">Object Relationships</h2>
+
+- Relationships define how objects interact and relate with each other.
+
+<h3>1. Association</h3>
+
+- Two objects are related with a "uses-a" relationship.
+
+
+```C++
+class Teacher 
+{
+public:
+    void teach(Student &student) 
+    {
+        // Teacher interacts with Student
+    }
+};
+```
+<br>
+
+<h3> 2. Aggregation</h3>
+
+- An object is related with another object with a "has-a" relationship.
+- It is a special type of association, where the contained object can exist outside the container (weak ownership).
+
+```C++
+class Book 
+{
+public:
+    std::string title;
+    Book(std::string title) : title(title) {}
+};
+
+class Library 
+{
+public:
+    std::vector<Book*> books;  // Aggregated relationship with Book
+
+    void addBook(Book* book) 
+    {
+        books.push_back(book);
+    }
+};
+```
+
+- If the containing (aggregate) object is destroyed, the contained (aggregated) object is not necessarily destroyed as well.
+
+<br>
+
+<h3>3. Composition</h3>
+
+- A stronger relationship where one class contains another class, and the contained objects have a <strong>dependent</strong> lifecycle.
+- This is also a "has-a" relationship, but with <strong>strong</strong> ownership.
+
+```C++
+class Room 
+{
+public:
+    std::string name;
+    Room(std::string name) : name(name) {}
+};
+
+class House 
+{
+private:
+    std::vector<Room> rooms;  // Composed relationship with Room
+
+public:
+    void addRoom(const std::string& roomName) {
+        rooms.emplace_back(roomName);
+    }
+};
+```
+
+- `House` and `Room` are in a composition relatioship - one cannot exist without the other.
+- The contained objects are destroyed when the containing object is destroyed.
+
