@@ -264,7 +264,11 @@ int main()
 - `a->funA()` is resolved to `B::funA()` (B's implementation), overriding the original virtual function.
 - `a->funB()` is resolved to `A::funB()` (A's implementation), as the object is being called through its base class pointer. Same story for `funC()` and `funD()`.
 <br>
-- <strong>Note:</strong> If the object was instead defined as: `B *a = new B()`, then `a->funB()` would be resolved to `B::funB()` (B's implementation), since its now just a pointer to an object of type `B`.
+
+- <strong>Note:</strong> 
+If the object was instead defined as: `B *a = new B()`, then `a->funB()` would be resolved to `B::funB()` (B's implementation), since its now just a pointer to an object of type `B`.
+
+<h5>Example output:</h5>
 
 ![alt text](assets/image-5.png)
 
