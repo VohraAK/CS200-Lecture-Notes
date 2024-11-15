@@ -270,6 +270,6 @@ If the object was instead defined as: `B *a = new B()`, then `a->funB()` would b
 
 <h5>Example output:</h5>
 
-![alt text](assets/image-5.png)
+![alt text](assets/image-6.png)
 
 <br>
