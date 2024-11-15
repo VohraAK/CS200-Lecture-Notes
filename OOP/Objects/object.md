@@ -412,6 +412,9 @@ public:
     }
 };
 ```
+- Association can be bidirectional, where both objects can interact with each other.
+- Example: A `movie` object can have references to `actor` and `director` objects, while an `anctor` and a `director` can have references to a `movie` object. 
+
 <br>
 
 <h3> 2. Aggregation</h3>
@@ -430,12 +433,13 @@ public:
 class Library 
 {
 public:
-    std::vector<Book*> books;  // Aggregated relationship with Book
-
+    std::vector<Book*> books;  // only holds pointers to Book objects
     void addBook(Book* book) 
     {
         books.push_back(book);
     }
+
+    // Book objects exist can exist outside the lifetime of Library object
 };
 ```
 
@@ -459,7 +463,7 @@ public:
 class House 
 {
 private:
-    std::vector<Room> rooms;  // Composed relationship with Room
+    std::vector<Room> rooms;  // Room object themselves are store inside a House object
 
 public:
     void addRoom(const std::string& roomName) {

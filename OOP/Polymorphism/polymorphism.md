@@ -180,3 +180,92 @@ int main()
 }
 ```
 ![alt text](assets/image-3.png)
+
+---
+
+<h3>Quiz 3 example:</h3>
+
+```C++
+#include <iostream>
+
+using namespace std;
+
+class A
+{
+public:
+    virtual void funA()
+    {
+        cout << "funA-ClassA" << endl;
+    }
+
+    void funB()
+    {
+        cout << "funB-ClassA" << endl;
+    }
+
+    void funC()
+    {
+        cout << "funC-ClassA" << endl;
+    }
+
+    void funD()
+    {
+        cout << "funD-ClassA" << endl;
+        funC();
+        funA();
+    }
+
+    virtual ~A()
+    {
+        cout << "Virtual Destructor-ClassA" << endl;
+    }
+
+};
+
+class B : public A
+{
+public:
+    void funA()
+    {
+        cout << "funA-ClassB" << endl;
+    }
+
+    void funB()
+    {
+        cout << "funB-ClassB" << endl;
+    }
+
+    ~B()
+    {
+        cout << "Destructor-ClassB" << endl;
+    }
+};
+
+int main()
+{
+    A *a = new B();
+    a->funA();
+    a->funB();
+    a->funC();
+    a->funD();
+    delete a;
+
+    return 0;
+}
+```
+
+<h5>Output</h5>
+
+![alt text](assets/image-4.png)
+
+<h5>Explanation</h5>
+
+- Since the object of type `B` is accessed by its base class pointer: `A *a = new B()`, the compiler does not know the type of the object at compile-time, hence it resolves subsequent function calls at runtime.
+- `a->funA()` is resolved to `B::funA()` (B's implementation), overriding the original virtual function.
+- `a->funB()` is resolved to `A::funB()` (A's implementation), as the object is being called through its base class pointer. Same story for `funC()` and `funD()`.
+<br>
+- <strong>Note:</strong> If the object was instead defined as: `B *a = new B()`, then `a->funB()` would be resolved to `B::funB()` (B's implementation), since its now just a pointer to an object of type `B`.
+
+![alt text](assets/image-5.png)
+
+<br>

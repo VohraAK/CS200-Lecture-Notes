@@ -1,20 +1,89 @@
 #include <iostream>
 
-class Base 
+using namespace std;
+
+class A
 {
 public:
-    virtual ~Base() { std::cout << "Base destructor\n"; }
+    virtual void funA()
+    {
+        cout << "funA-ClassA" << endl;
+    }
+
+    void funB()
+    {
+        cout << "funB-ClassA" << endl;
+    }
+
+    void funC()
+    {
+        cout << "funC-ClassA" << endl;
+    }
+
+    void funD()
+    {
+        cout << "funD-ClassA" << endl;
+        funC();
+        funA();
+    }
+
+    virtual ~A()
+    {
+        cout << "Virtual Destructor-ClassA" << endl;
+    }
+
 };
 
-class Derived : public Base 
+class B : public A
 {
 public:
-    ~Derived() { std::cout << "Derived destructor\n"; }
+    void funA()
+    {
+        cout << "funA-ClassB" << endl;
+    }
+
+    void funB()
+    {
+        cout << "funB-ClassB" << endl;
+    }
+
+    ~B()
+    {
+        cout << "Destructor-ClassB" << endl;
+    }
 };
 
-int main() 
+int main()
 {
-    Base* ptr = new Derived();
-    delete ptr;  // Derived destructor is called
+    A *a = new B();
+    a->funA();
+    a->funB();
+    a->funC();
+    a->funD();
+    delete a;
+
+    return 0;
 }
+
+
+
+// #include <iostream>
+
+// class Base 
+// {
+// public:
+//     virtual ~Base() { std::cout << "Base destructor\n"; }
+// };
+
+// class Derived : public Base 
+// {
+// public:
+//     ~Derived() { std::cout << "Derived destructor\n"; }
+// };
+
+// int main() 
+// {
+//     Base* ptr = new Derived();
+//     delete ptr;  // Derived destructor is called
+// }
 
