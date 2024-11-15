@@ -55,7 +55,7 @@ public:
 
 int main()
 {
-    A *a = new B();
+    B *a = new B();
     a->funA();
     a->funB();
     a->funC();
