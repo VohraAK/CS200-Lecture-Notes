@@ -260,7 +260,8 @@ int main()
 
 <h5>Explanation</h5>
 
-- Since the object of type `B` is accessed by its base class pointer: `A *a = new B()`, the compiler does not know the type of the object at compile-time, hence it resolves subsequent function calls at runtime.
+- The object of type `B` is accessed by its base class pointer: `A *a = new B()`.
+- The compiler does not know the type of the object at compile-time, hence it resolves subsequent function calls at runtime.
 - `a->funA()` is resolved to `B::funA()` (B's implementation), overriding the original virtual function.
 - `a->funB()` is resolved to `A::funB()` (A's implementation), as the object is being called through its base class pointer. Same story for `funC()` and `funD()`.
 <br>
