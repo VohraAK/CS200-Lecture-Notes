@@ -119,19 +119,22 @@ protected:
 public:
     MyException(std::string msg) : message(msg) {}
     std::string what() { return message; }
-}
+};
+
 
 class DivisionByZeroException : public MyException
 {
 public:
-    DivisionByZeroException(std::string msg) 
-    { message = "DivisionByZeroException: " + msg; }
+    DivisionByZeroException(std::string msg) : MyException(msg)
+    { message = "\033[91mDivisionByZeroException: \033[0m" + msg; }
 };
+
 
 int divide(int a, int b)
 {
     if (b == 0) 
-    { throw DivisionByZeroException("undefined behavior!"); }
+
+    { throw DivisionByZeroException("Expression results in undefined behaviour."); }
 
     return (a / b);
 }
