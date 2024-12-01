@@ -501,5 +501,6 @@ int main()
 
     // no ambiguity now
 }
-
 ```
+
+It's important to note here that the grandparent class is shared between `Student` and `Employee`. The child class is now responsible for constructing the grandparent class, therefore **any constructor** of the grandparent class must be called by the child class, implicitly or explicitly.
