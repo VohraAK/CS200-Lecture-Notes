@@ -181,6 +181,8 @@ int main()
 ```
 ![alt text](assets/image-3.png)
 
+Declaring virtual destructors, therefore, are useful when the program requires upcasting (accessing a derived class object through its base cass pointer). Since the pointer only has access to base class methods and therefore will **only** call the base class destructor upon deletion, **virtual destructors** defined in the base class are useful to completely destroy the object.
+
 ---
 
 <h3>Quiz 3 example:</h3>
