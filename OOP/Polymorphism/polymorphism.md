@@ -183,6 +183,8 @@ int main()
 
 Declaring virtual destructors, therefore, are useful when the program requires upcasting (accessing a derived class object through its base cass pointer). Since the pointer only has access to base class methods and therefore will **only** call the base class destructor upon deletion, **virtual destructors** defined in the base class are useful to completely destroy the object.
 
+Declaring the base destructor as virtual ensures all derived destructors are implicitly virtual. Without virtual propagation, the compiler might not invoke destructors further down the hierarchy. You don't need to explicitly declare every derived-class destructor as virtual; it happens automatically when the base destructor is virtual.
+
 ---
 
 <h3>Quiz 3 example:</h3>
